@@ -14,3 +14,19 @@ export const getAllMessages = async (req, res, next) => {
     next(error);
   }
 };
+
+export const createMessage = async (req, res, next) => {
+  try {
+    const { message } = req.body;
+
+    const newMessage = await Message.create({ message });
+
+    res.status(201).json({
+      success: true,
+      data: newMessage,
+    });
+  } catch (error) {
+    error.statusCode = 500;
+    next(error);
+  }
+};

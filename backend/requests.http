@@ -1,0 +1,18 @@
+### Get all messages
+GET http://localhost:8080/messages
+
+### Add a new message
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+    "message": "Message sent from VS Code REST Client"
+}
+
+### Add a new message with null content
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+    "message": null
+}
