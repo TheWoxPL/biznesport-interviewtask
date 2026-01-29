@@ -1,4 +1,5 @@
 import { MessagesTable } from "@/components/MessagesTable";
+import { MessageForm } from "@/components/MessageForm"
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
       <main className="flex flex-col gap-2 row-start-1 sm:items-start pt-4">
         Interview Task
       <section>
+        <MessageForm />
           <MessagesTable />
         </section>
       </main>

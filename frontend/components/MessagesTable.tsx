@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, Loader2, AlertCircle } from "lucide-react";
 
 export function MessagesTable() {
-  // Pobieranie danych i stanów z RTK Query
   const { data: messages, isLoading, isError } = useGetMessagesQuery();
 
   if (isLoading) {
