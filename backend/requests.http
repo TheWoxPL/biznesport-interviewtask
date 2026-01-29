@@ -16,3 +16,14 @@ Content-Type: application/json
 {
     "message": null
 }
+
+### Edit a message
+PUT http://localhost:8080/messages/1
+Content-Type: application/json
+
+{
+    "message": "Updated message content"
+}
+
+### Delete a message
+DELETE http://localhost:8080/messages/1
