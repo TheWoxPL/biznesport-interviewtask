@@ -26,13 +26,17 @@ app.use((error, req, res, next) => {
 });
 
 // DB Connection
-sequelize
-  .then(() => {
-    console.log("Connection has been established successfully.");
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error("Unable to connect to the database: ", error);
-  });
+// sequelize
+//   .then(() => {
+//     console.log("Connection has been established successfully.");
+//     app.listen(process.env.PORT, () => {
+//       console.log(`Server is running on port ${process.env.PORT}`);
+//     });
+//   })
+//   .catch((error) => {
+//     console.error("Unable to connect to the database: ", error);
+//   });
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});

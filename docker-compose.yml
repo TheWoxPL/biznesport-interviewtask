@@ -13,14 +13,19 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: interview123
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - "3306:3306"
     networks:
       - backend
     volumes:
       - db-vol:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     container_name: backend_api
@@ -28,12 +33,19 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=db
     ports:
       - "8080:8080"
     networks:
       - backend
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    command: sh -c "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start"
 
   frontend:
     container_name: next_frontend
