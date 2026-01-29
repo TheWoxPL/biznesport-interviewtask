@@ -9,8 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Loader2, AlertCircle } from "lucide-react";
+import { DeleteMessageDialog } from '@/components/DeleteMessageDialog'
+import { EditMessageDialog } from '@/components/EditMessageDialog'
+import { Loader2, AlertCircle } from "lucide-react";
 
 export function MessagesTable() {
   const { data: messages, isLoading, isError } = useGetMessagesQuery();
@@ -63,12 +64,8 @@ export function MessagesTable() {
                 </TableCell>
                 <TableCell className="text-right align-top py-4">
                   <div className="flex justify-end gap-2">
-                    <Button variant="outline" size="sm" className="h-8 w-8 p-0" title="Edytuj">
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                    <Button variant="destructive" size="sm" className="h-8 w-8 p-0" title="Usuń">
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                    <EditMessageDialog messageItem={item} />
+                    <DeleteMessageDialog messageId={item.id} />
                   </div>
                 </TableCell>
               </TableRow>
