@@ -2,7 +2,9 @@ import Message from "../models/message.js";
 
 export const getAllMessages = async (req, res, next) => {
   try {
-    const messages = await Message.findAll();
+    const messages = await Message.findAll({
+      order: [['createdAt', 'DESC']]
+    });
 
     res.status(200).json({
       success: true,
